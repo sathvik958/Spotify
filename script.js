@@ -1,4 +1,4 @@
-console.log("Lets write JS");
+// console.log("Lets write JS");
 
 let currentSong = new Audio();
 let songs;
@@ -64,7 +64,9 @@ const playMusic = (track, pause = false) => {
       });
   }
   document.querySelector(".songInfo").innerHTML = getDisplayName(track);
-  document.querySelector(".songTime").innerHTML = "00:00 / 00:00";
+  document.querySelector(".songTime_start").innerHTML = "00:00";
+  document.querySelector(".songTime_end").innerHTML = "00:00";
+  document.querySelector(".songTime-2").innerHTML = "00:00 / 00:00";
 };
 
 async function main() {
@@ -100,7 +102,7 @@ async function main() {
   ).forEach((e) => {
     e.addEventListener("click", (element) => {
       play.src = "assets/pause.svg";
-      console.log(e.querySelector(".info").firstElementChild.innerHTML);
+      // console.log(e.querySelector(".info").firstElementChild.innerHTML);
       playMusic(e.dataset.song);
     });
   });
@@ -118,10 +120,14 @@ async function main() {
 
   //Listen for timme update
   currentSong.addEventListener("timeupdate", () => {
-    console.log(currentSong.currentTime, currentSong.duration);
+    // console.log(currentSong.currentTime, currentSong.duration);
      const current = currentSong.currentTime;
   const duration = currentSong.duration;
-document.querySelector(".songTime").innerHTML =
+document.querySelector(".songTime_start").innerHTML =
+    `${formatSeconds(current)}`;
+document.querySelector(".songTime_end").innerHTML =
+    `${formatSeconds(duration)}`;
+document.querySelector(".songTime-2").innerHTML =
     `${formatSeconds(current)} / ${formatSeconds(duration)}`;
     let progress = 0;
   if (Number.isFinite(duration) && duration > 0) {
@@ -160,7 +166,7 @@ document.querySelector(".songTime").innerHTML =
 
   //Add eventListener for Previous and Next
   previous.addEventListener("click", (e)=>{
-    console.log('previous clicked');
+    // console.log('previous clicked');
     // console.log(currentSong.src);
     // console.log(songs);
     let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
@@ -179,7 +185,7 @@ document.querySelector(".songTime").innerHTML =
   })
 
   next.addEventListener("click", (e)=>{
-    console.log('next clicked');
+    // console.log('next clicked');
     // console.log(currentSong.src);
     // console.log(songs);
     let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
@@ -193,5 +199,14 @@ document.querySelector(".songTime").innerHTML =
     }
     
   })
+
+  //Add eventListener to Volume
+  document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e)=>{
+    // console.log(e, e.target, e.target.value);
+    currentSong.volume = parseInt(e.target.value)/100;
+    document.querySelector(".rangeValue").innerHTML = parseInt(e.target.value);
+  })
 }
+
+
 main();

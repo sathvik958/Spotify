@@ -1,9 +1,12 @@
+:root{
+--a : 0;
+}
 * {
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     /* background-color: rgb(231, 226, 226);
 color: white; */
 }
@@ -83,6 +86,7 @@ color: white; */
 
 .songList ul li:first-child {
     background-color: rgb(147, 112, 61);
+    position: static;
 }
 
 .songList ul li:nth-child(n+2):hover {
@@ -175,6 +179,7 @@ color: white; */
 .SpotifyPlaylists {
     padding: 16px;
 }
+
 .SpotifyPlaylists h1 {
     padding: 10px;
 }
@@ -205,6 +210,7 @@ color: white; */
 
 
 .card:hover {
+    --a:1;
     transform: translateY(-5px);
     box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.4), -6px -6px 15px rgba(255, 255, 255, 0.15);
 }
@@ -255,10 +261,43 @@ color: white; */
     padding: 10px;
 }
 
+.additional {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 150px;
+    right: 5px;
+}
+.range{
+display: flex;
+  align-items: center;  
+  gap: 5px;
+  color: rgb(220,220,220);
+  font-size: 14px;}
+
+  .rangeValue {
+  min-width: 40px;
+  font-variant-numeric: tabular-nums;
+}
+#range {
+    width: 100%;
+}
+
+.volume:hover::after {
+    content: "";
+}
+
 .seekbar {
-    position: absolute;
     height: 1px;
-    width: 97%;
+    width: 90%;
     border: 2px solid black;
     background: black;
     border-radius: 10px;
@@ -267,7 +306,13 @@ color: white; */
     cursor: pointer;
 }
 
+.songTime-2 {
+    display: none;
+}
+
 .circle {
+    touch-action: pan-x;
+  user-select: none;
     cursor: pointer;
     width: 10px;
     height: 10px;
@@ -291,8 +336,10 @@ color: white; */
     cursor: pointer;
 }
 
-.songTime {
-    width: 120px;
+.songTime_start, .songTime_end {
+    width: auto;
+    white-space: nowrap;
+    align-items: center;
     font-size: 15px;
 }
 
@@ -308,6 +355,7 @@ color: white; */
     justify-content: space-between;
     /* distributes available space */
     width: 100%;
+    align-items: center;
 }
 
 @media (max-width: 1470px) {
@@ -344,9 +392,9 @@ color: white; */
 
     .playbar {
         justify-content: center;
-        width: calc(100vw - 60px);
+        width: calc(100vw - 50px);
         padding: 8px;
-        height: 50px;
+        height: auto;
     }
 
     .musicBar {
@@ -372,13 +420,12 @@ color: white; */
         margin: 5px 120px 5px 75px;
     }
 
-    .songTime {
+    .songTime_start .songTime_end {
         flex: 0 1 auto;
-        text-align: right;
     }
 
     .seekbar {
-        width: 98%;
+        width: 95%;
     }
 
     .hamburger {
@@ -391,17 +438,20 @@ color: white; */
         justify-content: center;
 
         padding: 8px;
-        height: 50px;
     }
 
     .musicBar {
         align-items: center;
         gap: 5px;
-        padding: 0px;
+        margin-bottom: 10px;
+    }
+
+    .volume {
+        width: 120px;
     }
 
     .songInfo {
-        max-width: 200px;
+        max-width: 190px;
         flex: 1 1 auto;
         /* allow growth and shrink */
         min-width: 0;
@@ -414,12 +464,14 @@ color: white; */
         word-break: break-word;
         line-height: 1.2em;
     }
-.left{
-padding: 0;}
+
+    .left {
+        padding: 0;
+    }
+
     .songButtons {
         flex: 0 1 auto;
         text-align: center;
-        gap: 10px;
         margin: 10px 0px 10px 0px;
     }
 
@@ -431,7 +483,7 @@ padding: 0;}
     }
 
 
-    .songTime {
+    .songTime_start .songTime_end {
         text-align: center;
     }
 
@@ -439,6 +491,7 @@ padding: 0;}
         width: 95%;
     }
 }
+
 
 @media (max-width: 522px) {
     .card {
@@ -465,15 +518,43 @@ padding: 0;}
         align-items: center;
     }
 
+    .songTime_start,
+    .songTime_end {
+        display: none;
+    }
+
+    .songTime-2 {
+        display: flex;
+        font-size: 16px;
+        white-space: nowrap;
+        width: auto;
+        flex: 0 1 auto;
+    }
+
     .songInfo {
+        margin: 8px 0px;
         max-width: 100%;
-        /* override max-width */
         width: 100%;
+        font-size: 20px;
         text-align: center;
     }
 
+    .classic {
+        justify-items: center;
+        display: flex;
+        flex: 1 1 auto;
+        max-width: 100%;
+        white-space: nowrap;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .volume {
+        width: 180px;
+    }
+
     .seekbar {
-        width: 90%;
+        width: 95%;
         margin: 7px;
     }
 }
